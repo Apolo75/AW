@@ -1,0 +1,81 @@
+body {
+    margin: 0px;
+    background-color: rgb(173, 139, 103);
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+.div-parrafo{
+    background-color: antiquewhite;
+    border-radius: 5em;
+    margin: 30px 15px 30px 15px;
+    padding: 20px;
+}
+
+.titulo {
+    margin-top: 4em;
+    text-align: center;
+}
+
+.descripcion {
+    text-align: center;
+    margin-bottom: 5em;
+}
+
+.modal-header {
+    background-color: rgb(40, 154, 146);
+}
+
+h3 {
+    color: white
+}
+
+.modal-body {
+    display: flex;
+    /* Esto habilita Flexbox */
+    flex-direction: column;
+    /* Esto alinea los hijos en una columna */
+    align-items: center;
+    /* Esto centra los elementos horizontalmente */
+    justify-content: center;
+}
+
+.modal-footer {
+    background-color: rgb(173, 139, 103);
+}
+
+
+.btn-reservar {
+    background-color: rgb(40, 154, 146);
+    font-style: italic;
+}
+
+.btn-reservar:hover {
+    background-color: rgb(57, 173, 166);
+    font-style: italic;
+}
+
+.btn-cerrar-reserva {
+    color: white;
+    background-color: rgb(194, 162, 134);
+    font-style: italic;
+
+}
+
+.btn-cerrar-reserva:hover {
+    color: white;
+    background-color: rgb(98, 72, 51);
+}
+
+
+
+.btn-reservarTarjeta {
+    background-color: rgb(40, 154, 146);
+    font-style: italic;
+    border: none;
+}
+
+.btn-reservarTarjeta:hover {
+    background-color: rgb(57, 173, 166);
+
+}

@@ -1,0 +1,24 @@
+body {
+    margin: 0px;
+    background-color: rgb(173, 139, 103);
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+.mensajeReserva {
+    margin-top: 10em;
+    padding: 1em;
+    text-align: center;
+    margin-bottom: 20em;
+}
+
+.estilo-AtrasConfirmBTN{
+    background-color: rgb(40, 154, 146);
+    font-style: italic;
+
+}
+
+.estilo-AtrasConfirmBTN:hover{
+    background-color: rgb(57, 173, 166);
+    font-style: italic;
+}

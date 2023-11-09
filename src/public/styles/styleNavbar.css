@@ -1,0 +1,46 @@
+nav {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+
+    display: block;
+    margin: 0em;
+    background-color: rgb(40, 154, 146);
+    width: 100%;
+    padding: 1em;
+}
+
+ul {
+    padding: 0px;
+    display: inline;
+}
+
+li {
+    text-decoration: none;
+    display: inline-block;
+}
+
+li:hover {
+    background-color: rgb(194, 162, 134);
+    border-radius: 1em;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    padding: 1em;
+}
+
+
+.estiloMivar {
+    position: fixed;
+    z-index: 9999;
+    background-color: rgb(40, 154, 146) !important;
+}
+
+/* Cambiar el color del texto de los enlaces de la navbar */
+.navbar-nav .nav-link {
+    color: white;
+    /* reemplaza con tu color preferido */
+}
