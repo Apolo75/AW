@@ -43,30 +43,6 @@ input {
     margin: 0.5em;
 }
 
-.tarjeta {
-    margin: 1em;
-    background-color: rgb(198, 174, 154);
-    padding: 2em;
-    padding-top: 0.5em;
-    border-radius: 1em;
-    text-align: center;
-
-    max-height: 25em;
-    max-width: 25em;
-
-
-}
-
-.tarjeta:hover {
-    background-color: rgb(221, 198, 180);
-}
-
-.precio-tarjeta {
-    margin-left: auto;
-    margin-right: 0px;
-    font-weight: lighter;
-}
-
 div.tarjeta img {
     display: block;
     max-height: 15em;
@@ -174,7 +150,8 @@ h3 {
 
 .precio-tarjeta {
     margin-right: 10px;
-    /* Esto empuja todo lo demás hacia el otro extremo del contenedor */
+    margin-left: auto;
+    font-weight: lighter;
 }
 
 
