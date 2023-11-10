@@ -17,12 +17,12 @@
     <%- include('partials/navbar') %>
 
     <div class="mensaje-error">
-        <h2>Error</h2>
+        <h2>Error <%= error_status %></h2>
 
         <% if (msj_error) { %>
-            <p> <%= msj_error %> </p>
+            <p><%= msj_error %></p>
         <% } else { %>
-            <p> Ha ocurrido un error, por favor vuelva a intentarlo más tarde. </p>
+            <p>Ha ocurrido un error, por favor vuelva a intentarlo más tarde.</p>
         <% } %>
         
         <form action="/#" method="get">

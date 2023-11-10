@@ -32,8 +32,6 @@ class DAOdestino {
           console.log("Error al conectar a la base de datos", err);
           callback(err, null);
         } else {
-          console.log("ID:", id, "Tipo de dato:", typeof id);
-
           connection.query("SELECT * FROM destinos WHERE id = ?", [id], (err, resultados) => {
             connection.release();
             if (err) {

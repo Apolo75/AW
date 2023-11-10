@@ -18,6 +18,8 @@ ul {
 li {
     text-decoration: none;
     display: inline-block;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
 }
 
 li:hover {
@@ -42,5 +44,7 @@ a {
 /* Cambiar el color del texto de los enlaces de la navbar */
 .navbar-nav .nav-link {
     color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
     /* reemplaza con tu color preferido */
 }
