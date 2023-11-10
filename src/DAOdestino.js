@@ -4,7 +4,7 @@ class DAOdestino {
       this.pool = pool;
     }
   
-    // Obtener todos los destinos
+    // Obtener todos los destinos de la base de datos
     obtenerTodosLosDestinos(callback) {
      
       this.pool.getConnection((err, connection) => {

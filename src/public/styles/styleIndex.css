@@ -1,25 +1,29 @@
-body {
+/* PRACTICA VOLUNTARIA: ENTREGA 2
+     ALUMNOS: IVAN PISONERO DIAZ 
+              ENRIQUE MARTINEZ SANCHEZ
+     GRUPO: 44 */
+
+body { /* cuerpo de la vista principal */
     margin: 0px;
     background-color: rgb(173, 139, 103);
     display: inline-block;
-
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
 }
 
-.titulo_y_busqueda {
+.titulo_y_busqueda { /* titulo en el centro */
     padding: 3em;
     margin-top: 3em;
     text-align: center;
 }
 
-h1 {
+h1 { /* formato de letra para h1 */
     color: black;
     font-style: italic;
     text-align: center;
 }
 
-#form_buscar_destino {
+#form_buscar_destino { /* formato del buscador de destinos */
     display: inline-block;
     padding: 1em;
     border-radius: 2em;
@@ -29,21 +33,20 @@ h1 {
     margin-bottom: auto;
 }
 
-#form_buscar_destino:hover {
+#form_buscar_destino:hover { /* hover del obj anterior*/
     background-color: rgb(221, 198, 180);
 }
 
-.form_destino {
+.form_destino { /* separacion de arriba y abajo del buscador destino */
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-
 }
 
 input {
     margin: 0.5em;
 }
 
-div.tarjeta img {
+div.tarjeta img { /* formato de la imagen de la tarjeta */
     display: block;
     max-height: 15em;
     max-width: 22em;
@@ -58,7 +61,7 @@ div.tarjeta img {
 
 }
 
-.seccion_presentacion {
+.seccion_presentacion { /* formato de quienes somos */
     margin-top: 8em;
     margin-bottom: 4em;
     background-color: rgb(173, 139, 103);
@@ -91,6 +94,7 @@ h3 {
     background-color: rgb(173, 139, 103);
 }
 
+/* formato BOTONES SE RESERVAR Y DE MAS INFORMACION DE CADA TARJETA */
 
 .btn-reservar {
     background-color: rgb(40, 154, 146);
@@ -106,15 +110,12 @@ h3 {
     color: white;
     background-color: rgb(194, 162, 134);
     font-style: italic;
-
 }
 
 .btn-cerrar-reserva:hover {
     color: white;
     background-color: rgb(98, 72, 51);
 }
-
-
 
 .btn-reservarTarjeta {
     background-color: rgb(40, 154, 146);
@@ -124,7 +125,6 @@ h3 {
 
 .btn-reservarTarjeta:hover {
     background-color: rgb(57, 173, 166);
-
 }
 
 .form-masInfo {
@@ -142,7 +142,6 @@ h3 {
 }
 
 .tarjeta-info {
-
     align-items: center;
     /* Esto asegura la alineación vertical en el centro */
     margin-bottom: 10px;
@@ -184,8 +183,6 @@ h3 {
     /* margin: 1em;*/
     background-color: rgb(221, 198, 180);
 }
-
-
 
 .card-footer {
     border-radius: 15px;

@@ -1,3 +1,5 @@
+ //PRACTICA VOLUNTARIA: ENTREGA 2 ALUMNOS: IVAN PISONERO DIAZ Y ENRIQUE MARTINEZ SANCHEZ GRUPO: 44
+// Crear un pool de conexiones a la base de datos
 const mysql = require('mysql');
 const pool = mysql.createPool({
   host: "localhost",
@@ -6,25 +8,30 @@ const pool = mysql.createPool({
   database: "viajes",
 });
 
+// instancia de Express
 const express = require('express');
-var path = require('path');
-
-const DAOReserva = require('./DAOReserva.js');
-const DAOdestino = require('./DAOdestino.js');
-
-const destinosDAO = new DAOdestino(pool);
-const reservaDAO = new DAOReserva(pool);
-
 const app = express();
 
+// EJS como motor de plantillas en path views
+var path = require('path');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+// Configurar la carpeta pública para archivos estáticos
 app.use(express.static('public')); //para coger la ruta de la imagen
 app.use('/styles', express.static('styles'));
+
+// Importar y configurar middleware para analizar cuerpos de solicitud JSON y de formulario
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// Instanciamos los objetos DAO
+const DAOReserva = require('./DAOReserva.js');
+const DAOdestino = require('./DAOdestino.js');
+const destinosDAO = new DAOdestino(pool);
+const reservaDAO = new DAOReserva(pool);
+
+// RUTAS:
 
 app.get('/', function (req, res, next) {
   destinosDAO.obtenerTodosLosDestinos((err, destinos) => {
@@ -79,11 +86,12 @@ app.post('/reservar', function (request, response, next) {
     err.status = 400; 
     return next(err);
   }
+  /*
   if (!regexFecha.test(fecha)) {
     var err = new Error('El formato de la fecha no es correcto (debe ser dd/mm/aaaa)');
     err.status = 400; 
     return next(err);
-  }
+  }*/
 
   reservaDAO.insertarReserva(destino_id, nombre, correo, fecha, (err, resultado) => {
     if (err) {
@@ -95,7 +103,9 @@ app.post('/reservar', function (request, response, next) {
   })
 });
 
-// Ultimo Middleware para manejar errores genéricos
+// MIDDLEWARES 
+
+// para manejar errores genéricos
 app.use((error, req, res, next) => {
   // Log del error para depuración
   console.error("ha entrado en middleware generico de error");
@@ -106,7 +116,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-
+// Iniciar el servidor ESCUCHANDO EN PUERTO 3000 
 app.listen(3000, (err) => {
   if (err) (console.log("Error al iniciar el servidor"));
   else console.log("Servidor activo");

@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="/styles/styleFooter.css">
 </head>
 
-<body>
-    <%- include('partials/navbar') %>
+<body> <!-- VISTA generica QUE ES RENDERIZADA POR EL MIDDLEWARE GENERICO DE ERROR, recibe el estado y mensaje de donde se lanzo y creo e error -->
+
+    <%- include('partials/navbar') %> <!-- Barra de navegacion -->
 
     <div class="mensaje-error">
         <h2>Error <%= error_status %></h2>
@@ -29,6 +30,6 @@
             <button class="btn btn-primary" type="submit"> Volver a inicio </button>
         </form>
     </div>
-    
+    <!-- Incluimos el footer -->
     <%- include('partials/footer.ejs') %>
 </body>

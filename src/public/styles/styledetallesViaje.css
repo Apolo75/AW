@@ -1,3 +1,4 @@
+/*Estilos para el cuerpo generico de detalles de un viaje, sus atributos y  sus botones*/
 body {
     margin: 0px;
     background-color: rgb(173, 139, 103);
@@ -16,6 +17,8 @@ body {
     font-size: 1.8em;
 
 }
+/*Elementos con formato y centrados*/
+
 .titulo {
     margin-top: 2em;
     text-align: center;
@@ -26,7 +29,7 @@ body {
     margin-bottom: 5em;
 }
 
-.modal-header {
+.modal-header { 
     background-color: rgb(40, 154, 146);
 }
 
@@ -48,7 +51,7 @@ h3 {
     background-color: rgb(173, 139, 103);
 }
 
-
+/*Botones y sus estilos de reserva */
 .btn-reservar {
     background-color: rgb(40, 154, 146);
     font-style: italic;
@@ -70,8 +73,6 @@ h3 {
     color: white;
     background-color: rgb(98, 72, 51);
 }
-
-
 
 .btn-reservarTarjeta {
     background-color: rgb(40, 154, 146);

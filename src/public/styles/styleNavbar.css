@@ -1,4 +1,4 @@
-nav {
+.navbar { /* FIJAMOS LA POSICION DE LA BARRA DE NAVEGACION  */
     position: fixed;
     left: 0px;
     top: 0px;
@@ -15,7 +15,7 @@ ul {
     display: inline;
 }
 
-li {
+li { /* formato de cada item de la barra de nav*/
     text-decoration: none;
     display: inline-block;
     font-family: 'Times New Roman', Times, serif;

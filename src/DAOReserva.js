@@ -1,6 +1,6 @@
+// COLSULTAS CONSTANTES 
 const consultaLeerReservaID = "SELECT * FROM reservas WHERE id = ?";
 const sentenciaInsertarReserva = "INSERT INTO reservas (destino_id, nombre_cliente, correo_cliente, fecha_reserva) VALUES (?, ?, ?, ?)";
-
 
 class DAOReserva {
     constructor(pool) {
@@ -20,6 +20,7 @@ class DAOReserva {
         });
     }
 
+    // INSERTAR RESERVA 
     insertarReserva(destino_id, nombre, correo, fecha_reserva, callback) {
         this.pool.getConnection(function (err, connection) {
             console.log ('he entrado en insertarreserva del dao')

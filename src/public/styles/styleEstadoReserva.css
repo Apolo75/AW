@@ -5,20 +5,19 @@ body {
     font-style: italic;
 }
 
-.mensajeReserva {
+.mensajeReserva { /*Formato para el mesnaje de reserva confirmata */
     margin-top: 10em;
     padding: 1em;
     text-align: center;
     margin-bottom: 20em;
 }
 
-.estilo-AtrasConfirmBTN{
-    background-color: rgb(40, 154, 146);
+.btn{ /*Color para el boton de atras */
     font-style: italic;
-
+    border:none;
+    background-color: rgb(36, 139, 133);
 }
 
-.estilo-AtrasConfirmBTN:hover{
-    background-color: rgb(57, 173, 166);
-    font-style: italic;
+.btn:hover{
+    background-color: rgb(46, 180, 171);
 }
