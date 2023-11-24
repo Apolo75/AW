@@ -116,6 +116,13 @@ app.use((error, req, res, next) => {
   });
 });
 
+//Último middleware, al que se llega si la página no se ha encontrado
+app.use((request, response, next) => {
+  //Estado 404, página no encontrada
+  response.status(404);
+  response.render('error', {msj_error: 'Página no encontrada', error_status: 404});
+});
+
 // Iniciar el servidor ESCUCHANDO EN PUERTO 3000 
 app.listen(3000, (err) => {
   if (err) (console.log("Error al iniciar el servidor"));
