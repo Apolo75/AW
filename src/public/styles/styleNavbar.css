@@ -48,3 +48,9 @@ a {
     font-style: italic;
     /* reemplaza con tu color preferido */
 }
+
+.caja-nombre {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+}

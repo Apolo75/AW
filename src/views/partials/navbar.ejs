@@ -24,7 +24,7 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <% if(true) { %>
+                <% if(locals.user === undefined ||locals.user === null) { %>
                     <li class="nav-item">
                         <button data-bs-toggle="modal" data-bs-target="#modalInicioSesion" class="nav-link fs-5" type="submit"> Iniciar sesión </button>
                         
@@ -37,7 +37,7 @@
                                     </div>
                         
                                     <div class="modal-body">
-                                        <form action="/inicarSesion" method="post"> 
+                                        <form action="/iniciarSesion" method="post"> 
                                             <!-- Nombre de usuario -->
                                             <div class="mb-3">
                                                 <label for="nombreUsuario" class="form-label"><strong>Nombre de usuario:</strong></label>
@@ -112,10 +112,18 @@
                             </div>
                         </div>
                     </li>
-                <% } else { %>
+                <% } else { %>  
+                    
                     <li class="nav-item">
-                        <span> <%= usuario.Nombre %> </span>
+                        <span class="nav-link"> Bienvenido, <%= locals.user.nombre %>! </span>
                     </li>
+
+                    <li class="nav-item">
+                        <form action="/cerrarSesion" method="get">
+                            <button class="nav-link"> Cerrar sesión </button>
+                        </form>
+                    </li>
+
                 <% } %>
                     <li class="nav-item">
                         <a class="navbar-brand" href="#">

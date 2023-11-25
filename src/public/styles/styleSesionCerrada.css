@@ -1,0 +1,13 @@
+body {
+    margin: 0px;
+    background-color: rgb(173, 139, 103);
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+.mensaje-sesion-cerrada {
+    margin-top: 10em;
+    padding: 1em;
+    text-align: center;
+    margin-bottom: 10em;
+}

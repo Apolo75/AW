@@ -8,29 +8,23 @@
     <title>Agencia de Viajes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/styleError.css">
     <link rel="stylesheet" href="/styles/styleNavbar.css">
     <link rel="stylesheet" href="/styles/styleFooter.css">
+    <link rel="stylesheet" href="/styles/styleSesionCerrada.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
-<body> <!-- VISTA generica QUE ES RENDERIZADA POR EL MIDDLEWARE GENERICO DE ERROR, recibe el estado y mensaje de donde se lanzo y creo e error -->
+<body>
 
     <%- include('partials/navbar') %> <!-- Barra de navegacion -->
 
-    <div class="mensaje-error">
-        <h2>Error <%= error_status %></h2>
-
-        <% if (msj_error) { %>
-            <p><%= msj_error %></p>
-        <% } else { %>
-            <p>Ha ocurrido un error, por favor vuelva a intentarlo más tarde.</p>
-        <% } %>
+    <div class="container-fluid mensaje-sesion-cerrada">
+        <h2>Su sesión ha sido cerrada correctamente</h2>
         
         <form action="/#" method="get">
             <button class="btn btn-primary" type="submit"> Volver a inicio </button>
         </form>
     </div>
     <!-- Incluimos el footer -->
-    <%- include('partials/footer.ejs') %> 
+    <%- include('partials/footer.ejs') %>
 </body>

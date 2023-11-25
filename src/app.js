@@ -12,6 +12,17 @@ const pool = mysql.createPool({
 const express = require('express');
 const app = express();
 
+//Sesiones
+const session = require('express-session');
+const mySQLSession = require('express-mysql-session');
+const MYSQLStore = mySQLSession(session);
+const sessionStore = new MYSQLStore({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "viajes",
+});
+
 // EJS como motor de plantillas en path views
 var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
@@ -25,11 +36,26 @@ app.use('/styles', express.static('styles'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//Middleware sesiones
+const middlewareSession = session({
+  saveUninitialized: false,
+  secret: 'evjnfheidf',
+  resave: false,
+  store: sessionStore,
+});
+app.use(middlewareSession);
+app.use(function(request, response, next) {
+  response.locals.user = request.session.user;
+  next();
+})
+
 // Instanciamos los objetos DAO
 const DAOReserva = require('./DAOReserva.js');
 const DAOdestino = require('./DAOdestino.js');
+const DAOUsuario = require('./DAOUsuario.js');
 const destinosDAO = new DAOdestino(pool);
 const reservaDAO = new DAOReserva(pool);
+const daoUsuario = new DAOUsuario(pool);
 
 // RUTAS:
 
@@ -103,12 +129,45 @@ app.post('/reservar', function (request, response, next) {
   })
 });
 
+app.post("/iniciarSesion", function(request, response, next) {
+
+  daoUsuario.getUserByName(request.body.nombreUsuario, (err, resultado) => {
+    if(err) {
+      response.status(300); 
+      next(err); 
+    }
+
+    let usuario = resultado[0];
+    if(usuario === undefined) {
+      response.status(300);
+      response.render('error', {msj_error: "Usuario no encontrado", error_status: 300});
+    }
+    else if(usuario.contrasena !== request.body.contrasena) {
+      response.status(300);
+      response.render('error', {msj_error: "Contraseña incorrecta", error_status: 300});
+    }
+    else {
+      response.status(200);
+      request.session.user = usuario;
+      response.locals.user = usuario;
+      response.render('sesionIniciada', {user: usuario});
+    }
+  })
+});
+
+app.get("/cerrarSesion", function(request, response, next) {
+  request.session.destroy();
+  response.locals.user = undefined;
+  response.render('sesionCerrada');
+});
+
 // MIDDLEWARES 
 
 // para manejar errores genéricos
 app.use((error, req, res, next) => {
   // Log del error para depuración
   console.error("ha entrado en middleware generico de error");
+  console.log(error.message);
   // Envía el estado del error y el mensaje a la plantilla de error
   res.status(error.status || 500).render('error', {
     msj_error: error.message || 'Ha ocurrido un error interno.',

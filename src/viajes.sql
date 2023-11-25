@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 06-11-2023 a las 03:40:35
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Nov 25, 2023 at 02:01 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `viajes`
+-- Database: `viajes`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `comentarios`
+-- Table structure for table `comentarios`
 --
 
 CREATE TABLE `comentarios` (
@@ -38,7 +38,7 @@ CREATE TABLE `comentarios` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `destinos`
+-- Table structure for table `destinos`
 --
 
 CREATE TABLE `destinos` (
@@ -50,12 +50,12 @@ CREATE TABLE `destinos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
--- Volcado de datos para la tabla `destinos`
+-- Dumping data for table `destinos`
 --
 
 INSERT INTO `destinos` (`id`, `nombre`, `descripcion`, `imagen`, `precio`) VALUES
 (1, 'Paris', 'Paris es una ciudad maravillosa.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem est provident commodi totam, ducimus quasi optio quas quam aliquam placeat aut tempore alias sint possimus sequi cupiditate quibusdam porro sed animi et ut. Sint perferendis reiciendis excepturi beatae deleniti consequuntur doloremque incidunt id placeat. Dolores aliquid alias dicta blanditiis delectus.', 'images/paris.png,images/paris_2.png,images/paris_3.png', 55.00),
-(2, 'Roma', 'En roma te enamoras de cualquiera.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem est provident commodi totam, ducimus quasi optio quas quam aliquam placeat aut tempore alias sint possimus sequi cupiditate quibusdam porro sed animi et ut. Sint perferendis reiciendis excepturi beatae deleniti consequuntur doloremque incidunt id placeat. Dolores aliquid alias dicta blanditiis delectus. ' , 'images/roma.png,images/roma_2.png,images/roma_3.png', 150.00),
+(2, 'Roma', 'En roma te enamoras de cualquiera.  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem est provident commodi totam, ducimus quasi optio quas quam aliquam placeat aut tempore alias sint possimus sequi cupiditate quibusdam porro sed animi et ut. Sint perferendis reiciendis excepturi beatae deleniti consequuntur doloremque incidunt id placeat. Dolores aliquid alias dicta blanditiis delectus. ', 'images/roma.png,images/roma_2.png,images/roma_3.png', 150.00),
 (3, 'Nueva york', 'En la ciudad de la gran manzana, podrás vivir experiencias mágicas. En la ciudad de la gran manzana, podrás vivir experiencias mágicas. En la ciudad de la gran manzana, podrás vivir experiencias mágicas. En la ciudad de la gran manzana, podrás vivir experiencias mágicas.  En la ciudad de la gran manzana, podrás vivir experiencias mágicas. En la ciudad de la gran manzana, podrás vivir experiencias mágicas. En la ciudad de la gran manzana, podrás vivir experiencias mágicas. En la ciudad de la gran manzana, podrás vivir experiencias mágicas. ', 'images/newyork.png,images/newyork_2.png,images/newyork_3.png', 230.00),
 (4, 'Paris', 'paris es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiastica', 'images/paris.png,images/paris_2.png,images/paris_3.png', 444.00),
 (5, 'Paris', 'paris es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiasticaparis es fantiastica', 'images/paris.png,images/paris_2.png,images/paris_3.png', 444.00),
@@ -80,7 +80,7 @@ INSERT INTO `destinos` (`id`, `nombre`, `descripcion`, `imagen`, `precio`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `reservas`
+-- Table structure for table `reservas`
 --
 
 CREATE TABLE `reservas` (
@@ -92,63 +92,127 @@ CREATE TABLE `reservas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
--- Índices para tablas volcadas
+-- Dumping data for table `reservas`
+--
+
+INSERT INTO `reservas` (`id`, `destino_id`, `nombre_cliente`, `correo_cliente`, `fecha_reserva`) VALUES
+(1, 1, 'pruebaaaa', 'prueba@prueba', '2023-11-19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) UNSIGNED NOT NULL,
+  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
+('zJkZgOdkZIFuwo_HYAnl6tUSZ5iIbQc_', 1701000856, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":1,\"nombre\":\"Nombreprueba\",\"correo\":\"correoprueba\",\"contrasena\":\"contraseña\"}}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `correo` varchar(255) NOT NULL,
+  `contrasena` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contrasena`) VALUES
+(2, 'Nombreprueba', 'correoprueba', 'contraseña');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `comentarios`
+-- Indexes for table `comentarios`
 --
 ALTER TABLE `comentarios`
   ADD PRIMARY KEY (`id`),
   ADD KEY `destino_id` (`destino_id`);
 
 --
--- Indices de la tabla `destinos`
+-- Indexes for table `destinos`
 --
 ALTER TABLE `destinos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `reservas`
+-- Indexes for table `reservas`
 --
 ALTER TABLE `reservas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `destino_id` (`destino_id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`session_id`);
+
+--
+-- Indexes for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `comentarios`
+-- AUTO_INCREMENT for table `comentarios`
 --
 ALTER TABLE `comentarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `destinos`
+-- AUTO_INCREMENT for table `destinos`
 --
 ALTER TABLE `destinos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT de la tabla `reservas`
+-- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `comentarios`
+-- Constraints for table `comentarios`
 --
 ALTER TABLE `comentarios`
   ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`destino_id`) REFERENCES `destinos` (`id`);
 
 --
--- Filtros para la tabla `reservas`
+-- Constraints for table `reservas`
 --
 ALTER TABLE `reservas`
   ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`destino_id`) REFERENCES `destinos` (`id`);
