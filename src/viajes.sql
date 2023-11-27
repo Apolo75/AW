@@ -135,7 +135,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contrasena`) VALUES
-(2, 'Nombreprueba', 'correoprueba', 'contraseña');
+(2, 'Nombreprueba', 'correoprueba@gmail.com', 'contraseña');
 
 --
 -- Indexes for dumped tables

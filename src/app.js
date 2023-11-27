@@ -53,9 +53,11 @@ app.use(function(request, response, next) {
 const DAOReserva = require('./DAOReserva.js');
 const DAOdestino = require('./DAOdestino.js');
 const DAOUsuario = require('./DAOUsuario.js');
+
 const destinosDAO = new DAOdestino(pool);
 const reservaDAO = new DAOReserva(pool);
 const daoUsuario = new DAOUsuario(pool);
+
 
 // RUTAS:
 
@@ -162,6 +164,21 @@ app.post("/registrar", function(request, response, next) {
       next(err); 
     }
 
+    var regexNombre = /^[A-Za-zÀ-ÿ\s]+$/; // var RegEx no contiene números ni caracteres especiales
+    var regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // var RegExtiene indica: ni espacios ni arrobas seguido de arroba seguido de ni espacios ni arrobas seguido de . de sin 
+    var regexFecha = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/\d{4}$/;
+
+    if (!regexNombre.test(request.body.nombreUsuario)) {
+      var err = new Error('El formato del nombre no es correcto');
+      response.status(300);
+      return next(err);
+    }
+    if (!regexCorreo.test(request.body.correoUsuario)) {
+      var err = new Error('El formato del correo no es correcto');
+      response.status(300);
+      return next(err);
+    }
+
     if(resultado[0] !== undefined) {
       response.status(300);
       response.render('error', {msj_error: "Lo sentimos, el nombre de usuario ya está utilizado", error_status: 300});
@@ -196,8 +213,10 @@ app.post("/registrar", function(request, response, next) {
 app.get("/cerrarSesion", function(request, response, next) {
   request.session.destroy();
   response.locals.user = undefined;
+  response.status(200);
   response.render('sesionCerrada');
 });
+
 
 // MIDDLEWARES 
 
