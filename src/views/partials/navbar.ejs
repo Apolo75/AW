@@ -81,13 +81,20 @@
                                     </div>
                         
                                     <div class="modal-body">
-                                        <form action="/registrarse" method="post"> 
+                                        <form action="/registrar" method="post"> 
                                             <!-- Nombre de usuario -->
                                             <div class="mb-3">
                                                 <label for="nombreUsuario" class="form-label"><strong>Nombre de usuario:</strong></label>
                                                 <input type="text" class="form-control" id="nombreUsuario"
                                                     name="nombreUsuario" pattern="[A-Za-zÀ-ÿ\s]+"
                                                     title="Números o caracteres especiales no válidos" required>
+                                            </div>
+
+                                            <!-- Correo electrónico -->
+                                            <div class="mb-3">
+                                                <label for="correo" class="form-label"><strong>Correo electrónico:</strong></label>
+                                                <input type="email" class="form-control" id="correoUsuario"
+                                                    name="correoUsuario" required>
                                             </div>
                         
                                             <!-- Contrasena -->

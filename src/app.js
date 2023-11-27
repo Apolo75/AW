@@ -155,6 +155,44 @@ app.post("/iniciarSesion", function(request, response, next) {
   })
 });
 
+app.post("/registrar", function(request, response, next) {
+  daoUsuario.getUserByName(request.body.nombreUsuario, (err, resultado) => {
+    if(err) {
+      response.status(500); 
+      next(err); 
+    }
+
+    if(resultado[0] !== undefined) {
+      response.status(300);
+      response.render('error', {msj_error: "Lo sentimos, el nombre de usuario ya está utilizado", error_status: 300});
+    }
+    else {
+      daoUsuario.insertUser(request.body.nombreUsuario, request.body.correoUsuario, request.body.contrasena, (err, resultado) => {
+        if(err) {
+          response.status(500); 
+          next(err); 
+        } else {
+          response.status(200);
+          
+          daoUsuario.getUserByName(request.body.nombreUsuario, (err, resultado) => {
+            if(err) {
+              response.status(500); 
+              next(err); 
+            } else {
+              let usuario = resultado[0];
+
+              //Iniciar sesión con el usuario registrado
+              request.session.user = usuario;
+              response.locals.user = usuario;
+              response.render('usuarioRegistrado', {user: usuario});
+            }
+          })
+        }
+      })
+    }
+  })
+});
+
 app.get("/cerrarSesion", function(request, response, next) {
   request.session.destroy();
   response.locals.user = undefined;
