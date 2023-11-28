@@ -53,10 +53,25 @@ app.use(function(request, response, next) {
 const DAOReserva = require('./DAOReserva.js');
 const DAOdestino = require('./DAOdestino.js');
 const DAOUsuario = require('./DAOUsuario.js');
+const DAOComentarios = require('./DAOComentarios.js');
 
 const destinosDAO = new DAOdestino(pool);
 const reservaDAO = new DAOReserva(pool);
 const daoUsuario = new DAOUsuario(pool);
+const comentariosDAO = new DAOComentarios(pool);
+
+//peticiones:
+app.get('/comentarios/:id', function(req, res, next) {
+  const destinoId = req.params.id;
+
+  comentariosDAO.getComentariosbyId(destinoId, (err, comentarios) => {
+    if (err) {
+      next(err);
+    } else {
+      res.json(comentarios);
+    }
+  });
+});
 
 
 // RUTAS:
