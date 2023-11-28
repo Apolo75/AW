@@ -1,11 +1,17 @@
-footer { /*Estilos del footer negro */
+
+footer {
     background-color: black;
-    padding: 5em;
-    text-align: right;
+    color: #dde2e7;
+    padding: 20px 0;
 }
 
-footer p {
-    color: white;
+
+.footer-content {
+    text-align: left;
 }
 
-/*--------------*/
+@media (max-width: 768px) {
+    .footer-content {
+        text-align: center;
+    }
+}
