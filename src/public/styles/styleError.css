@@ -11,3 +11,14 @@ body { /*Estilos para el menesaje de error */
     text-align: center;
     margin-bottom: 20em;
 }
+
+.btn {
+   
+    background-color: rgb(33, 111, 111);
+    border: none;
+}
+
+.btn:hover{
+
+    background-color: rgb(47, 156, 156);
+}

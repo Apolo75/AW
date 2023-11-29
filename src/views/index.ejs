@@ -11,30 +11,56 @@
     <link rel="stylesheet" href="/styles/styleNavbar.css">
     <link rel="stylesheet" href="/styles/styleFooter.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> <!-- Conexion Bootstrap via segura CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Conexion Bootstrap via segura CDN-->
 </head>
 
-<body> 
+<body>
     <%- include('partials/navbar.ejs') %> <!-- Incluimos barra de navegacion -->
 
         <div class="titulo_y_busqueda">
-            <h1 id="header_principal">Agencia de Viajes</h1>
+            <h1 id="header_principal"><strong>~ Agencia de Viajes iTravel ~</strong></h1>
 
-            <form id="form_buscar_destino" action="#" method="get">
-                <div>
-                    Destino: <input type="text" name="destino" />
-                    <input class="btn btn-secondary" type="submit" value="Buscar" />
+
+            <div class="input-group">
+                <select class="custom-select" id="inputGroupSelect04">
+                    <option selected>Elige un destino</option>
+                    <% destinos.forEach(function(destino) { %>
+                        <option value="<%= destino.id %>">
+                            <%= destino.nombre %>
+                        </option>
+                        <% }); %>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button"
+                        onclick="redirigirADetalle()">Buscar!</button>
                 </div>
-            </form>
+            </div>
 
         </div>
+        <script>
+            function redirigirADetalle() {
+                var selectElement = document.getElementById('inputGroupSelect04');
+                var destinoId = selectElement.value;
+                var opcionSeleccionada = selectElement.options[selectElement.selectedIndex].text;
+
+                if (destinoId && opcionSeleccionada !== 'Elige un destino') {
+                    
+                    window.location.href = '/detallesViaje/' + destinoId;
+                } else {
+                    alert('Por favor, selecciona un destino.');
+                }
+            }
+
+        </script>
         <!-- Al renderizar esta vista se le pasa el objeto con los parametros de la plantilla a usar aqui  -->
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 justify-content-center m-auto"> <!-- Fila de columnas bootstrap flexible -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 justify-content-center m-auto">
+            <!-- Fila de columnas bootstrap flexible -->
             <% if (destinos && destinos.length> 0) { %>
                 <% destinos.forEach((destino, index)=> { %>
                     <div class="col mb-5">
-                        <div class="card h-100 p-4">  <!-- Card de bootstrap elemento de la columna -->
-                            <img src="<%= destino.imagen%>" class="card-img-top" 
+                        <div class="card h-100 p-4"> <!-- Card de bootstrap elemento de la columna -->
+                            <img src="<%= destino.imagen%>" class="card-img-top"
                                 alt="Imagen del destino <%= destino.nombre %>">
                             <div class="card-body">
                                 <h3 class="card-title">Viaje a <%= destino.nombre %>
@@ -50,17 +76,17 @@
                                     </strong>
                                 </span>
                                 <!-- Botones de cada tarjeta -->
-                                <% if(locals.user !== undefined) {%>
-                                    <button type="button" class="btn btn-primary btn-reservarTarjeta" data-bs-toggle="modal"
-                                        data-bs-target="#reserva<%= index %>">Reservar</button>
-                                <% } %>
-                                <a href="/detallesViaje/<%= destino.id %>" class="btn btn-primary btn-masInfo"
-                                    role="button">Más información</a>
+                                <% if(locals.user !==undefined) {%>
+                                    <button type="button" class="btn btn-primary btn-reservarTarjeta"
+                                        data-bs-toggle="modal" data-bs-target="#reserva<%= index %>">Reservar</button>
+                                    <% } %>
+                                        <a href="/detallesViaje/<%= destino.id %>" class="btn btn-primary btn-masInfo"
+                                            role="button">Más información</a>
                             </div>
                         </div>
                     </div>
                     <!-- Modal generico que abre el boton de cada tarjeta de reserva -->
-                    <% if(locals.user !== undefined) { %>
+                    <% if(locals.user !==undefined) { %>
                         <div class="modal" id="reserva<%= index %>">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
@@ -81,13 +107,14 @@
                                             </div>
                                             <!-- Boton reservar -->
                                             <div class="d-grid gap-2">
-                                                <input class="btn btn-secondary btn-lg btn-reservarTarjeta" type="submit"
-                                                    value="Reservar">
+                                                <input class="btn btn-secondary btn-lg btn-reservarTarjeta"
+                                                    type="submit" value="Reservar">
                                             </div>
                                             <!-- Campo oculto de id del destino para servidor -->
                                             <input type="hidden" name="destinoId" value="<%= destino.id %>" />
                                             <input type="hidden" name="nombreCliente" value="<%= locals.user.nombre %>">
-                                            <input type="hidden" name="correoElectronico" value="<%= locals.user.correo %>">
+                                            <input type="hidden" name="correoElectronico"
+                                                value="<%= locals.user.correo %>">
                                         </form>
                                     </div>
                                     <!-- boton cerrar en el footer de card -->
@@ -100,13 +127,13 @@
                             </div>
                         </div>
 
-                    <% } %>
-                <% }) %>
-            <% } else { %> <!-- Si no hay nada en bbdd muestra mensaje -->
-                <div class="col">
-                    <p>No se encontraron destinos disponibles.</p>
-                </div>
-            <% } %>
+                        <% } %>
+                            <% }) %>
+                                <% } else { %> <!-- Si no hay nada en bbdd muestra mensaje -->
+                                    <div class="col">
+                                        <p>No se encontraron destinos disponibles.</p>
+                                    </div>
+                                    <% } %>
         </div>
 
         <!-- Seccion presentacion Quienes Somos -->
@@ -134,7 +161,7 @@
         </div>
 
         <!-- Incluimos el footer -->
-        
+
         <%- include('partials/footer.ejs') %>
 
 </body>
