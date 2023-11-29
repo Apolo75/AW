@@ -121,12 +121,12 @@ app.post('/reservar', function (request, response, next) {
   var regexFecha = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/\d{4}$/;
   if (!regexNombre.test(nombre)) {
     var err = new Error('El formato del nombre del formulario no es correcto');
-    err.status = 400; 
+    err.status = 300; 
     return next(err);
   }
   if (!regexCorreo.test(correo)) {
     var err = new Error('El formato del correo del formulario no es correcto');
-    err.status = 400; 
+    err.status = 300; 
     return next(err);
   }
   /*
@@ -135,6 +135,19 @@ app.post('/reservar', function (request, response, next) {
     err.status = 400; 
     return next(err);
   }*/
+
+  let now = new Date();
+  let anio_reserva = Number.parseInt(fecha.slice(0, 4));
+  let mes_reserva = Number.parseInt(fecha.slice(5, 7));
+  let dia_reserva = Number.parseInt(fecha.slice(8, 10));
+
+  if( (anio_reserva < now.getFullYear()) ||
+      ((anio_reserva == now.getFullYear()) && (mes_reserva < now.getMonth() + 1)) ||
+      ((anio_reserva == now.getFullYear()) && (mes_reserva == now.getMonth() + 1) && (dia_reserva < now.getDate()))) {
+        var err = new Error('La fecha de reserva es anterior a la fecha actual');
+        err.status = 300;
+        next(err);
+      }
 
   reservaDAO.insertarReserva(destino_id, nombre, correo, fecha, (err, resultado) => {
     if (err) {
