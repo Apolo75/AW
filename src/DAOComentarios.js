@@ -14,7 +14,7 @@ class DAOComentarios {
         console.log("Error al conectar a la base de datos", err);
         callback(err, null);
       } else {
-        connection.query(sentInsertarComentario, [destino_id, usuario_nombre, comentario, "27/11/2023"], (err, resultado) => {
+        connection.query(sentInsertarComentario, [destino_id, usuario_nombre, comentario, new Date()], (err, resultado) => {
           connection.release();
           if (err) callback(err, null);
           else callback(null, resultado);

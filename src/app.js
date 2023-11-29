@@ -233,6 +233,21 @@ app.get("/cerrarSesion", function(request, response, next) {
 });
 
 
+
+app.post("/publicarComentario/:id", function(request, response, next) {
+  console.log(request.body);
+  comentariosDAO.insertComment(request.body.nom_usuario, request.params.id, request.body.comentario, (err, resultado) => {
+    if(err) {
+      response.status(300); 
+      next(err); 
+    } else {
+      response.status(200);
+      response.end();
+    }
+  })
+})
+
+
 // MIDDLEWARES 
 
 // para manejar errores genéricos

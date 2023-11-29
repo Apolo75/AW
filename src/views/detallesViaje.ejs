@@ -122,11 +122,11 @@
                 <div class="col offset-2 col-8">
                     <!-- Introducir comentarios  si la sesión está iniciada -->
                     <% if(locals.user !== undefined) {%>
-                        <form action="/comment" method="post">
-                            <input type="textarea" class="form-control" name="comentario" placeholder="Publique un comentario acerca de este destino" required>
-                            <input type="hidden" name="destino_id" value="<%= destino.id %>">
-                            <input type="hidden" name="usuario_nombre" value="<%= locals.user.nombre %>">
-                        </form> 
+                        <form id="formComentario">
+                            <input type="textarea" class="form-control" id="textAreaComentario" placeholder="Publique un comentario acerca de este destino" required>
+                            <input type="hidden" id="nomUsuario" value="<%= locals.user.nombre %>">
+                            <input class="btn btn-secondary" type="submit" value="Publicar" id="publicarComentario">
+                        </form>
                     <% } %>
                     <div class="container mt-4">
                         <h2>Comentarios</h2>
@@ -137,6 +137,7 @@
                 </div>
             </div>
         </div>
+        
          <!-- Incluimos el footer  -->
         <%- include('partials/footer.ejs') %>
 </body>

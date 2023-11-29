@@ -1,8 +1,7 @@
 $(document).ready(function() {
-    var id = destinoId; // Reemplaza esto con el ID apropiado
 
-    $.ajax({
-        url: '/comentarios/' + id,
+    var JSONCargarComentarios = {
+        url: '/comentarios/' + destinoId,
         type: 'GET',
         success: function(comentarios) {
             var contenido = '';
@@ -13,13 +12,36 @@ $(document).ready(function() {
                                     '<h6 class="card-subtitle mb-2 text-muted">' + comentario.fecha_comentario + '</h6>' +
                                     '<p class="card-text">' + comentario.comentario + '</p>' +
                                 '</div>' +
-                             '</div>';
-            });
-            $('#comentarios-container').html(contenido);
+                            '</div>';
+        });
+        $('#comentarios-container').html(contenido);
         },
         error: function() {
             alert('Error al cargar los comentarios');
         }
+    };
+
+    $.ajax(JSONCargarComentarios);
+
+    $("#formComentario").on("submit", function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: '/publicarComentario/' + destinoId,
+            type: 'POST',
+            data: {
+                comentario: $("#textAreaComentario").val(),
+                nom_usuario: $("#nomUsuario").val()
+            },
+            success: function() {
+                $.ajax(JSONCargarComentarios);
+                $("#textAreaComentario").val("");
+
+            },
+            error: function() {
+                alert($("#textAreaComentario").text());
+                //alert('Error al publicar el comentario, por favor, vuelva a intentarlo más tarde.');
+            }
+        })
     });
 });
-
