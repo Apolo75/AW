@@ -121,25 +121,26 @@ app.post('/reservar', function (request, response, next) {
   var correo = request.body.correoElectronico;
   var fecha = request.body.fechaReserva;
 
-  var regexNombre = /^[a-z0-9_-]+$/; // var RegEx no contiene números ni caracteres especiales
+  var regexNombre = /[A-Za-zÀ-ÿ0-9]{1,16}/; // var RegEx no contiene caracteres especiales
   var regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // var RegExtiene indica: ni espacios ni arrobas seguido de arroba seguido de ni espacios ni arrobas seguido de . de sin 
-  var regexFecha = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/\d{4}$/;
+  var regExCorreo2 = /[^]{5,250}/; //Longitud menor a 250 caracteres
+  var regExFecha = /[^]{1,200}/;
+  
   if (!regexNombre.test(nombre)) {
     var err = new Error('El formato del nombre del formulario no es correcto');
     err.status = 300; 
     return next(err);
   }
-  if (!regexCorreo.test(correo)) {
+  if (!regexCorreo.test(correo) ||!regExCorreo2.test(correo)) {
     var err = new Error('El formato del correo del formulario no es correcto');
     err.status = 300; 
     return next(err);
   }
-  /*
-  if (!regexFecha.test(fecha)) {
+  if (!regExFecha.test(fecha)) {
     var err = new Error('El formato de la fecha no es correcto (debe ser dd/mm/aaaa)');
     err.status = 400; 
     return next(err);
-  }*/
+  }
 
   let now = new Date();
   let anio_reserva = Number.parseInt(fecha.slice(0, 4));
@@ -190,7 +191,6 @@ app.post("/iniciarSesion", function(request, response, next) {
   })
 });
 
-//^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]){8,16}$
 app.post("/registrar", function(request, response, next) {
   daoUsuario.getUserByName(request.body.nombreUsuario, (err, resultado) => {
     if(err) {
@@ -198,17 +198,23 @@ app.post("/registrar", function(request, response, next) {
       next(err); 
     }
 
-    var regexNombre = /^[a-z0-9_-]+$/; // var RegEx no contiene números ni caracteres especiales
+    var regexNombre = /[A-Za-zÀ-ÿ0-9]{1,16}/; // var RegEx no contiene caracteres especiales
     var regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // var RegExtiene indica: ni espacios ni arrobas seguido de arroba seguido de ni espacios ni arrobas seguido de . de sin 
-    var regexFecha = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/\d{4}$/;
+    var regExCorreo2 = /[^]{5,250}/; //Longitud menor a 250 caracteres
+    var regExContrasena = /[A-Za-zÀ-ÿ0-9]{8,16}/; //No hay caracteres especiales y longitud entre 8 y 16
 
     if (!regexNombre.test(request.body.nombreUsuario)) {
       var err = new Error('El formato del nombre no es correcto');
       response.status(300);
       return next(err);
     }
-    if (!regexCorreo.test(request.body.correoUsuario)) {
+    if (!regexCorreo.test(request.body.correoUsuario) || !regExCorreo2.test(request.body.correoUsuario)) {
       var err = new Error('El formato del correo no es correcto');
+      response.status(300);
+      return next(err);
+    }
+    if (!regExContrasena.test(request.body.contrasena)) {
+      var err = new Error('El formato de la contraseña no es correcto');
       response.status(300);
       return next(err);
     }
@@ -254,9 +260,24 @@ app.get("/cerrarSesion", function(request, response, next) {
 
 
 app.post("/publicarComentario/:id", function(request, response, next) {
+
+  var regexNombre = /[A-Za-zÀ-ÿ0-9]{1,16}/; // var RegEx no contiene caracteres especiales
+  var regExComentario = /[A-Za-zÀ-ÿ0-9]{1,250}/; //No hay caracteres especiales y longitud entre 1 y 250
+
+  if (!regexNombre.test(request.body.nom_usuario)) {
+    var err = new Error('El formato del nombre no es correcto');
+    response.status(300);
+    return next(err);
+  }
+  if (!regExComentario.test(request.body.comentario)) {
+    var err = new Error('El formato del comentario no es correcto');
+    response.status(300);
+    return next(err);
+  }
+
   comentariosDAO.insertComment(request.body.nom_usuario, request.params.id, request.body.comentario, (err, resultado) => {
     if(err) {
-      response.status(300); 
+      response.status(500); 
       next(err); 
     } else {
       response.status(200);

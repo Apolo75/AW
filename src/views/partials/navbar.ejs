@@ -42,14 +42,16 @@
                                             <div class="mb-3">
                                                 <label for="nombreUsuario" class="form-label"><strong>Nombre de usuario:</strong></label>
                                                 <input type="text" class="form-control" id="nombreUsuario"
-                                                    name="nombreUsuario" pattern="[A-Za-zÀ-ÿ\s]+"
-                                                    title="Números o caracteres especiales no válidos" required>
+                                                    name="nombreUsuario" pattern="[A-Za-zÀ-ÿ0-9]{1,16}"
+                                                    title="Caracteres especiales no válidos y la longitud debe ser menor a 17 caracteres" required>
                                             </div>
                         
                                             <!-- Contrasena -->
                                             <div class="mb-3">
                                                 <label for="contrasena" class="form-label"><strong>Contraseña: </strong></label>
-                                                <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                                                <input type="password" class="form-control" id="contrasena" name="contrasena" 
+                                                pattern="[A-Za-zÀ-ÿ0-9]{8,16}"
+                                                title="La contraseña debe contener entre 8 y 16 caracteres" required>
                                             </div>
                                         
                                             <!-- Boton iniciar sesión -->
@@ -86,21 +88,24 @@
                                             <div class="mb-3">
                                                 <label for="nombreUsuario" class="form-label"><strong>Nombre de usuario:</strong></label>
                                                 <input type="text" class="form-control" id="nombreUsuario"
-                                                    name="nombreUsuario" pattern="[A-Za-zÀ-ÿ0-9\s]+"
-                                                    title="Caracteres especiales no válidos" required>
+                                                    name="nombreUsuario" pattern="[A-Za-zÀ-ÿ0-9]{1,16}"
+                                                    title="Caracteres especiales no válidos y la longitud debe ser menor a 17 caracteres" required>
                                             </div>
 
                                             <!-- Correo electrónico -->
                                             <div class="mb-3">
                                                 <label for="correo" class="form-label"><strong>Correo electrónico:</strong></label>
                                                 <input type="email" class="form-control" id="correoUsuario"
-                                                    name="correoUsuario" required>
+                                                    name="correoUsuario" pattern="[^]{5,250}" required>
                                             </div>
                         
                                             <!-- Contrasena -->
+                                            <!-- /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]){8,16}$/ -->
                                             <div class="mb-3">
                                                 <label for="contrasena" class="form-label"><strong>Contraseña: </strong></label>
-                                                <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                                                <input type="password" class="form-control" id="contrasena" name="contrasena" 
+                                                pattern="[A-Za-zÀ-ÿ0-9]{8,16}"
+                                                title="La contraseña debe contener entre 8 y 16 caracteres" required>
                                             </div>
                                         
                                             <!-- Boton registro -->
