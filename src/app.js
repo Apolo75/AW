@@ -121,7 +121,7 @@ app.post('/reservar', function (request, response, next) {
   var correo = request.body.correoElectronico;
   var fecha = request.body.fechaReserva;
 
-  var regexNombre = /^[A-Za-zÀ-ÿ\s]+$/; // var RegEx no contiene números ni caracteres especiales
+  var regexNombre = /^[a-z0-9_-]+$/; // var RegEx no contiene números ni caracteres especiales
   var regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // var RegExtiene indica: ni espacios ni arrobas seguido de arroba seguido de ni espacios ni arrobas seguido de . de sin 
   var regexFecha = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/\d{4}$/;
   if (!regexNombre.test(nombre)) {
@@ -190,6 +190,7 @@ app.post("/iniciarSesion", function(request, response, next) {
   })
 });
 
+//^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]){8,16}$
 app.post("/registrar", function(request, response, next) {
   daoUsuario.getUserByName(request.body.nombreUsuario, (err, resultado) => {
     if(err) {
@@ -197,7 +198,7 @@ app.post("/registrar", function(request, response, next) {
       next(err); 
     }
 
-    var regexNombre = /^[A-Za-zÀ-ÿ\s]+$/; // var RegEx no contiene números ni caracteres especiales
+    var regexNombre = /^[a-z0-9_-]+$/; // var RegEx no contiene números ni caracteres especiales
     var regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // var RegExtiene indica: ni espacios ni arrobas seguido de arroba seguido de ni espacios ni arrobas seguido de . de sin 
     var regexFecha = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/\d{4}$/;
 

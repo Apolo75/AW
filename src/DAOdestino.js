@@ -43,6 +43,26 @@ class DAOdestino {
         }
       });
     }
+
+    buscarDestinos(termino, callback) {
+      this.pool.getConnection((err, connection) => {
+        if (err) {
+          console.log("Error al conectar a la base de datos", err);
+          callback(err, null);
+        } else {
+          // Usar LIKE en SQL para buscar destinos que contengan el término de búsqueda
+          connection.query("SELECT * FROM destinos WHERE nombre LIKE ?", ['%' + termino + '%'], (err, resultados) => {
+            connection.release();
+            if (err) {
+              callback(err, null);
+            } else {
+              callback(null, resultados);
+            }
+          });
+        }
+      });
+    }
+    
     
   
   }

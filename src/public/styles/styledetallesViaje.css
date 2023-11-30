@@ -21,6 +21,7 @@ body {
 
 .titulo {
     margin-top: 2em;
+    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -85,3 +86,6 @@ h3 {
     background-color: rgb(57, 173, 166);
 
 }
+
+
+
