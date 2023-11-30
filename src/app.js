@@ -60,6 +60,9 @@ const reservaDAO = new DAOReserva(pool);
 const daoUsuario = new DAOUsuario(pool);
 const comentariosDAO = new DAOComentarios(pool);
 
+const __dirPublic = "public";
+const __dirImagenes = "images";
+
 //peticiones:
 app.get('/comentarios/:id', function(req, res, next) {
   const destinoId = req.params.id;
@@ -83,7 +86,7 @@ app.get('/', function (req, res, next) {
       //Procesa cada destino para convertir la cadena de 'imagen' en un array de 'imagenes'
       destinos.forEach(destino => {
         destino.imagenes = destino.imagen.split(','); // Suponiendo que 'imagen' es una cadena de rutas separadas por comas
-        if (destino.imagenes.length > 0) destino.imagen = destino.imagenes[0];
+        if (destino.imagenes.length > 0) destino.imagen = path.join(__dirImagenes, destino.imagenes[0]);
       });
 
       // Si todo sale bien, renderiza la vista 'index.ejs' pasando los destinos ya procesados
@@ -105,6 +108,8 @@ app.get('/detallesViaje/:id', function (req, res, next) {
     else {
       //convertir la cadena de 'imagen' en un array de 'imagenes'
       destino.imagenes = destino.imagen.split(','); // Suponiendo que 'imagen' es una cadena de rutas separadas por comas
+      for(let i = 0; i < destino.imagenes.length; i++) destino.imagenes[i] = path.join(__dirImagenes, destino.imagenes[i]);
+
       res.render('detallesViaje', { destino: destino });
     }
   });
@@ -248,7 +253,6 @@ app.get("/cerrarSesion", function(request, response, next) {
 
 
 app.post("/publicarComentario/:id", function(request, response, next) {
-  console.log(request.body);
   comentariosDAO.insertComment(request.body.nom_usuario, request.params.id, request.body.comentario, (err, resultado) => {
     if(err) {
       response.status(300); 
