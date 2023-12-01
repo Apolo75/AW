@@ -116,6 +116,7 @@ app.get('/detallesViaje/:id', function (req, res, next) {
 });
 
 app.post('/reservar', function (request, response, next) {
+  console.log(request.session.user);
   var destino_id = request.body.destinoId;
   var nombre = request.body.nombreCliente;
   var correo = request.body.correoElectronico;
@@ -184,6 +185,7 @@ app.post("/iniciarSesion", function(request, response, next) {
     }
     else {
       response.status(200);
+      usuario.contrasena = undefined;
       request.session.user = usuario;
       response.locals.user = usuario;
       response.render('sesionIniciada', {user: usuario});
@@ -239,6 +241,7 @@ app.post("/registrar", function(request, response, next) {
               let usuario = resultado[0];
 
               //Iniciar sesión con el usuario registrado
+              usuario.contrasena = undefined;
               request.session.user = usuario;
               response.locals.user = usuario;
               response.render('usuarioRegistrado', {user: usuario});
